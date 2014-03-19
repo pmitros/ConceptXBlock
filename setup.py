@@ -1,4 +1,4 @@
-"""Setup for audio XBlock."""
+"""Setup for xoncept XBlock."""
 
 import os
 from setuptools import setup
@@ -15,19 +15,19 @@ def package_data(pkg, root):
 
 
 setup(
-    name='audio-xblock',
+    name='xoncept-xblock',
     version='0.1',
-    description='audio XBlock',   # TODO: write a better description.
+    description='xoncept XBlock',   # TODO: write a better description.
     packages=[
-        'audio',
+        'xoncept',
     ],
     install_requires=[
         'XBlock',
     ],
     entry_points={
         'xblock.v1': [
-            'audio = audio:AudioXBlock',
+            'xoncept = xoncept:XonceptXBlock',
         ]
     },
-    package_data=package_data("audio", "static"),
+    package_data=package_data("xoncept", "static"),
 )
