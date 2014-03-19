@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Concept Map XBlock</title>
+  <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/smoothness/jquery-ui.css" />
+  <script src="http://builds.handlebarsjs.com.s3.amazonaws.com/handlebars-v1.3.0.js"> </script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+  <link rel="stylesheet" href="sample.css" />
+
+<script id="lo-template" type="text/x-handlebars-template">
+<div class="lo_drag" style="border:1px solid #DDDDDD; width:200px; height:55px; display:inline-block; background-color: #FCFCFC; border-radius: 3px; padding:0px">
+  <div style="block;background-color: #F0F0F0; height:20px; padding:3px;">
+    <div class="obj_title"> {{title}} </div>
+    <div class="obj_icons"> <a href="/wiki/{{title}}"><span  style="display:inline-block;" class="ui-icon ui-icon-pencil"></span></a> <span style="display:inline-block;" class="ui-icon ui-icon-close lo_close"></span> </div>
+  </div>
+  <div class="objective_desc">
+    {{render}}
+  </div>
+</div>
+</script>
+
+</head>
+<body>
+
+<div>
+  <div class="header"> Learning objectives </div>
+  <div class="objectives">
+    <div class="subheader">Taught    </div>
+    <ul id="taught" class="obj_drop"> 
+    </ul>
+  </div>
+  <div class="objectives">
+    <div class="subheader">Exercised </div>
+    <ul id="exercised" class="obj_drop">
+    </ul>
+  </div>
+  <div class="objectives">
+    <div class="subheader">Required  </div>
+    <ul id="required" class="obj_drop"> </ul>
+  </div>
+</div>
+
+<div class="bottom">
+  <div class="searchbox">
+    <div class="search">
+      <label for="tags">Search: </label>
+      <input class="search_input" size=16>
+    </div>
+    <div class="search_results">
+    </div>
+  </div>
+  <div class="description">
+    Description
+  </div>
+</div>
+
+<!--div id="foo" style="display:inline-block"></div-->
+
+</body>
+
+<script type="text/javascript" src="sample.js">
+</script>
+
+</html>
