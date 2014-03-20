@@ -30,13 +30,20 @@ class XonceptXBlock(XBlock):
         The primary view of the XonceptXBlock, shown to students
         when viewing courses.
         """
-        html = self.resource_string("static/html/Xoncept.html")
+        html = self.resource_string("static/html/xoncept.html")
         print self.src
         print html.format
         frag = Fragment(html.format(src = self.src))
-        frag.add_css(self.resource_string("static/css/Xoncept.css"))
-        frag.add_javascript(self.resource_string("static/js/src/Xoncept.js"))
-        frag.initialize_js('XonceptXBlock')
+        frag.add_css_url("https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/smoothness/jquery-ui.css")
+        frag.add_css(self.resource_string("static/css/xoncept.css"))
+
+        frag.add_javascript_url("http://builds.handlebarsjs.com.s3.amazonaws.com/handlebars-v1.3.0.js")
+#        frag.add_javascript_url("https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js")
+        frag.add_javascript_url("https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js")
+
+        frag.add_javascript(self.resource_string("static/js/xoncept.js"))
+
+        #frag.initialize_js('XonceptXBlock')
         print self.xml_text_content()
         return frag
 
@@ -49,8 +56,6 @@ class XonceptXBlock(XBlock):
             ("XonceptXBlock",
              """<vertical_demo>
                   <Xoncept src="http://localhost/Ikea.mp3"> </Xoncept>
-                  <Xoncept src="http://localhost/skull.mp3"> </Xoncept>
-                  <Xoncept src="http://localhost/monkey.mp3"> </Xoncept>
                 </vertical_demo>
              """),
         ]

@@ -1,4 +1,4 @@
-<!doctype html>
+<!--!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
@@ -7,16 +7,16 @@
   <script src="http://builds.handlebarsjs.com.s3.amazonaws.com/handlebars-v1.3.0.js"> </script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
-  <link rel="stylesheet" href="sample.css" />
+  <link rel="stylesheet" href="xoncept.css" /-->
 
 <script id="lo-template" type="text/x-handlebars-template">
 <div class="lo_drag" style="border:1px solid #DDDDDD; width:200px; height:55px; display:inline-block; background-color: #FCFCFC; border-radius: 3px; padding:0px">
   <div style="block;background-color: #F0F0F0; height:20px; padding:3px;">
-    <div class="obj_title"> {{title}} </div>
-    <div class="obj_icons"> <a href="/wiki/{{title}}"><span  style="display:inline-block;" class="ui-icon ui-icon-pencil"></span></a> <span style="display:inline-block;" class="ui-icon ui-icon-close lo_close"></span> </div>
+    <div class="obj_title"> {{{{title}}}} </div>
+    <div class="obj_icons"> <a href="/wiki/{{{{title}}}}"><span  style="display:inline-block;" class="ui-icon ui-icon-pencil"></span></a> <span style="display:inline-block;" class="ui-icon ui-icon-close lo_close"></span> </div>
   </div>
   <div class="objective_desc">
-    {{render}}
+    {{{{render}}}}
   </div>
 </div>
 </script>
@@ -60,7 +60,7 @@
 
 </body>
 
-<script type="text/javascript" src="sample.js">
+<!--script type="text/javascript" src="sample.js">
 </script>
 
-</html>
+<!--/html-->
