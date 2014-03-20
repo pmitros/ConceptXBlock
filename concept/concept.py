@@ -9,9 +9,9 @@ from xblock.fields import Scope, Integer, String
 from xblock.fragment import Fragment
 
 
-class XonceptXBlock(XBlock):
+class ConceptXBlock(XBlock):
     """
-    This XBlock will play an MP3 file as an HTML5 Xoncept element. 
+    This XBlock allows concept tagging in a course. 
     """
 
     # Fields are defined on the class.  You can access them in your code as
@@ -49,24 +49,24 @@ class XonceptXBlock(XBlock):
     # TO-DO: change this view to display your data your own way.
     def student_view(self, context=None):
         """
-        The primary view of the XonceptXBlock, shown to students
+        The primary view of the ConceptXBlock, shown to students
         when viewing courses.
         """
         print "HERE", self.concept_map
-        html = self.resource_string("static/html/xoncept.html")#.replace("PLACEHOLDER_FOR_CONCEPT_MAP",json.dumps(self.concept_map))
+        html = self.resource_string("static/html/concept.html")#.replace("PLACEHOLDER_FOR_CONCEPT_MAP",json.dumps(self.concept_map))
         #print self.server
         #print html.format
         cm = self.concept_map
         print "Read", cm
         frag = Fragment(html.replace("PLACEHOLDER_FOR_CONCEPT_MAP",cm).replace("SERVER", self.server))   #)#format(server = self.server, concept_map = cm))
         frag.add_css_url("https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/smoothness/jquery-ui.css")
-        frag.add_css(self.resource_string("static/css/xoncept.css"))
+        frag.add_css(self.resource_string("static/css/concept.css"))
 
         frag.add_javascript_url("http://builds.handlebarsjs.com.s3.amazonaws.com/handlebars-v1.3.0.js")
 #        frag.add_javascript_url("https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js")
         frag.add_javascript_url("https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js")
 
-        frag.add_javascript(self.resource_string("static/js/xoncept.js"))
+        frag.add_javascript(self.resource_string("static/js/concept.js"))
 
         frag.initialize_js('ConceptXBlock')
         print self.xml_text_content()
@@ -78,9 +78,9 @@ class XonceptXBlock(XBlock):
     def workbench_scenarios():
         """A canned scenario for display in the workbench."""
         return [
-            ("XonceptXBlock",
+            ("ConceptXBlock",
              """<vertical_demo>
-                  <Xoncept server="http://pmitros.edx.org:8000/"> </Xoncept>
+                  <Concept server="http://pmitros.edx.org:8000/"> </Concept>
                 </vertical_demo>
              """),
         ]

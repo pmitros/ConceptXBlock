@@ -1,4 +1,4 @@
-"""Setup for xoncept XBlock."""
+"""Setup for concept XBlock."""
 
 import os
 from setuptools import setup
@@ -15,19 +15,19 @@ def package_data(pkg, root):
 
 
 setup(
-    name='xoncept-xblock',
+    name='concept-xblock',
     version='0.1',
-    description='xoncept XBlock',   # TODO: write a better description.
+    description='concept XBlock',   # TODO: write a better description.
     packages=[
-        'xoncept',
+        'concept',
     ],
     install_requires=[
         'XBlock',
     ],
     entry_points={
         'xblock.v1': [
-            'xoncept = xoncept:XonceptXBlock',
+            'concept = concept:ConceptXBlock',
         ]
     },
-    package_data=package_data("xoncept", "static"),
+    package_data=package_data("concept", "static"),
 )
