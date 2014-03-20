@@ -58,7 +58,7 @@ class XonceptXBlock(XBlock):
         #print html.format
         cm = self.concept_map
         print "Read", cm
-        frag = Fragment(html.replace("PLACEHOLDER_FOR_CONCEPT_MAP",cm))   #)#format(server = self.server, concept_map = cm))
+        frag = Fragment(html.replace("PLACEHOLDER_FOR_CONCEPT_MAP",cm).replace("SERVER", self.server))   #)#format(server = self.server, concept_map = cm))
         frag.add_css_url("https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/smoothness/jquery-ui.css")
         frag.add_css(self.resource_string("static/css/xoncept.css"))
 

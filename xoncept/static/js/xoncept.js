@@ -53,8 +53,7 @@ function dump_state()
     console.log(state);
 
     url = xblock_runtime.handlerUrl(xblock_element, 'update_concept_map');
-    $.post(url, state, function(data) {
-    }).done( function(data){
+    $.post(url, state, function(data) {}).done( function(data){
     } ).fail( function(data){
     	console.log("Could not save");
     	console.log(state);
@@ -79,7 +78,14 @@ function refresh_search(search_string)
 
 function populate(column, array) {
     for(i=0; i<array.length; i++) {
-    }	
+	var slug = array[i];
+	url = xblock_runtime.handlerUrl(xblock_element, 'relay_handler')
+	render = "Hello";
+	$.post(url, JSON.stringify({'suffix':'get_concept/'+slug}), function(render) {
+	    item = create_item(slug, render.article);
+	    $("#"+column).append(item);
+	});
+    }
 }
 
 function init() {
