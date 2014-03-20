@@ -2,6 +2,8 @@
 
 import pkg_resources
 
+import json, requests
+
 from xblock.core import XBlock
 from xblock.fields import Scope, Integer, String
 from xblock.fragment import Fragment
@@ -14,10 +16,18 @@ class XonceptXBlock(XBlock):
 
     # Fields are defined on the class.  You can access them in your code as
     # self.<fieldname>.
-    src = String(
+    server = String(
            scope = Scope.settings, 
-           help = "URL for MP3 file to play"
+           help = "Concept map server URL"
         )
+
+    @XBlock.json_handler
+    def relay_handler(self, request, suffix):
+        print request, type(request), dict(request)
+        url = self.server+request['suffix']
+        r = requests.get(url, params=request) 
+        print url,":", r.text[:80]
+        return json.loads(r.text)
 
     def resource_string(self, path):
         """Handy helper for getting resources from our kit."""
@@ -31,9 +41,9 @@ class XonceptXBlock(XBlock):
         when viewing courses.
         """
         html = self.resource_string("static/html/xoncept.html")
-        print self.src
+        print self.server
         print html.format
-        frag = Fragment(html.format(src = self.src))
+        frag = Fragment(html.format(server = self.server))
         frag.add_css_url("https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/smoothness/jquery-ui.css")
         frag.add_css(self.resource_string("static/css/xoncept.css"))
 
@@ -43,7 +53,7 @@ class XonceptXBlock(XBlock):
 
         frag.add_javascript(self.resource_string("static/js/xoncept.js"))
 
-        #frag.initialize_js('XonceptXBlock')
+        frag.initialize_js('ConceptXBlock')
         print self.xml_text_content()
         return frag
 
@@ -55,7 +65,7 @@ class XonceptXBlock(XBlock):
         return [
             ("XonceptXBlock",
              """<vertical_demo>
-                  <Xoncept src="http://localhost/Ikea.mp3"> </Xoncept>
+                  <Xoncept server="http://pmitros.edx.org:8000/"> </Xoncept>
                 </vertical_demo>
              """),
         ]

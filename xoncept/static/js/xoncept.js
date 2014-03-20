@@ -1,6 +1,18 @@
 var lo_source   = $("#lo-template").html();
 var template = Handlebars.compile(lo_source);
 
+var xblock_runtime = null;
+var xblock_element = null;
+
+function ConceptXBlock(runtime, element)
+{
+    xblock_runtime = runtime;
+    xblock_element = element;
+    console.log( runtime );
+    init();
+    //console.log( element );
+}
+
 function update_item(item, slug, full)
 {
     item.data('slug',slug);
@@ -49,18 +61,22 @@ function dump_state()
 
 function refresh_search(search_string)
 {
-    $.getJSON("http://pmitros.edx.org:8000/get_concept_list", {'q':search_string}, function(data) {
+    url = xblock_runtime.handlerUrl(xblock_element, 'relay_handler')
+    //$.getJSON("http://pmitros.edx.org:8000/get_concept_list", {'q':search_string}, function(data) {
+    $.post(url, JSON.stringify({'suffix':'get_concept_list','q':search_string}), function(data) {
 	$(".search_results").text("");
 	for (var i = 0; i<data.length; i++) {
-            add_search_item(data[i], "Hello World");
+	    var slug = data[i];
+	    url = xblock_runtime.handlerUrl(xblock_element, 'relay_handler')
+	    $.post(url, JSON.stringify({'suffix':'get_concept/'+slug}), function(render) {
+	    //$.getJSON("http://pmitros.edx.org:8000/get_concept/"+slug, function(render) {
+		add_search_item(slug, render.article);
+	    })
 	}
     })
 }
 
-$(function() {
-    //var html = template({title:"Hello", render:"Hello world example"});
-    //$("#foo").html(html);
-    
+function init() {
     $(".obj_drop").sortable({
 	connectWith: ".obj_drop",
 	update : function(event, ui) { dump_state(); },
@@ -78,4 +94,10 @@ $(function() {
     $(".search_input").change(function(){
 	refresh_search($(".search_input").val());
     });
+}
+
+$(function() {
+    //var html = template({title:"Hello", render:"Hello world example"});
+    //$("#foo").html(html);
+//    init();
 });
