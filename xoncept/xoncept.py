@@ -21,12 +21,24 @@ class XonceptXBlock(XBlock):
            help = "Concept map server URL"
         )
 
+    concept_map = String(
+        scope  = Scope.user_state_summary, # User scope: Global. Block scope: Usage
+        help = "Concept map"
+        )
+
+    @XBlock.json_handler
+    def update_concept_map(self, request, suffix):
+        print request
+        self.concept_map = json.dumps(request)
+        print "Wrote:", self.concept_map
+        return {'success':True}
+
     @XBlock.json_handler
     def relay_handler(self, request, suffix):
-        print request, type(request), dict(request)
+        #print request, type(request), dict(request)
         url = self.server+request['suffix']
         r = requests.get(url, params=request) 
-        print url,":", r.text[:80]
+        #print url,":", r.text[:80]
         return json.loads(r.text)
 
     def resource_string(self, path):
@@ -40,10 +52,13 @@ class XonceptXBlock(XBlock):
         The primary view of the XonceptXBlock, shown to students
         when viewing courses.
         """
-        html = self.resource_string("static/html/xoncept.html")
-        print self.server
-        print html.format
-        frag = Fragment(html.format(server = self.server))
+        print "HERE", self.concept_map
+        html = self.resource_string("static/html/xoncept.html")#.replace("PLACEHOLDER_FOR_CONCEPT_MAP",json.dumps(self.concept_map))
+        #print self.server
+        #print html.format
+        cm = self.concept_map
+        print "Read", cm
+        frag = Fragment(html.replace("PLACEHOLDER_FOR_CONCEPT_MAP",cm))   #)#format(server = self.server, concept_map = cm))
         frag.add_css_url("https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/smoothness/jquery-ui.css")
         frag.add_css(self.resource_string("static/css/xoncept.css"))
 

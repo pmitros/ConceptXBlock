@@ -8,9 +8,7 @@ function ConceptXBlock(runtime, element)
 {
     xblock_runtime = runtime;
     xblock_element = element;
-    console.log( runtime );
     init();
-    //console.log( element );
 }
 
 function update_item(item, slug, full)
@@ -20,7 +18,7 @@ function update_item(item, slug, full)
     item.mouseover(function() {
 	$(".description").html("<h1>"+slug+"</h1><p>"+full+"</p>");
     })
-    item.find(".lo_close").mouseup(function(event){item.remove()});
+    item.find(".lo_close").mouseup(function(event){item.remove(); dump_state();});
     dump_state();
 }
 
@@ -51,10 +49,15 @@ function dump_state()
 	     'exercised': $("#exercised").find(".lo_drag").map(function(){return $(this).data("slug")}).toArray(),
 	     'required' : $("#required").find(".lo_drag").map(function(){return $(this).data("slug")}).toArray()
 	    };
-    $.post("/update/", state).done( function(data){
+    state = JSON.stringify(state);
+    console.log(state);
+
+    url = xblock_runtime.handlerUrl(xblock_element, 'update_concept_map');
+    $.post(url, state, function(data) {
+    }).done( function(data){
     } ).fail( function(data){
-	console.log("Could not save");
-	console.log(state);
+    	console.log("Could not save");
+    	console.log(state);
     } );
     return state;
 }
@@ -62,18 +65,21 @@ function dump_state()
 function refresh_search(search_string)
 {
     url = xblock_runtime.handlerUrl(xblock_element, 'relay_handler')
-    //$.getJSON("http://pmitros.edx.org:8000/get_concept_list", {'q':search_string}, function(data) {
     $.post(url, JSON.stringify({'suffix':'get_concept_list','q':search_string}), function(data) {
 	$(".search_results").text("");
 	for (var i = 0; i<data.length; i++) {
 	    var slug = data[i];
 	    url = xblock_runtime.handlerUrl(xblock_element, 'relay_handler')
 	    $.post(url, JSON.stringify({'suffix':'get_concept/'+slug}), function(render) {
-	    //$.getJSON("http://pmitros.edx.org:8000/get_concept/"+slug, function(render) {
 		add_search_item(slug, render.article);
 	    })
 	}
     })
+}
+
+function populate(column, array) {
+    for(i=0; i<array.length; i++) {
+    }	
 }
 
 function init() {
@@ -88,7 +94,13 @@ function init() {
 	    //ui.helper.css("border", "5px solid");
 	} 
     }).disableSelection();
-    
+
+    concept_map = $.parseJSON($("#initial-concept-map").text())
+    populate('required', concept_map.required)
+    populate('taught', concept_map.taught)
+    populate('exercised', concept_map.exercised)
+
+
     refresh_search("");
     
     $(".search_input").change(function(){

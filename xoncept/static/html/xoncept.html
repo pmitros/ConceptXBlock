@@ -1,13 +1,17 @@
 <script id="lo-template" type="text/x-handlebars-template">
 <div class="lo_drag" style="border:1px solid #DDDDDD; width:200px; height:55px; display:inline-block; background-color: #FCFCFC; border-radius: 3px; padding:0px">
   <div style="block;background-color: #F0F0F0; height:20px; padding:3px;">
-    <div class="obj_title"> {{{{title}}}} </div>
-    <div class="obj_icons"> <a href="/wiki/{{{{title}}}}"><span  style="display:inline-block;" class="ui-icon ui-icon-pencil"></span></a> <span style="display:inline-block;" class="ui-icon ui-icon-close lo_close"></span> </div>
+    <div class="obj_title"> {{title}} </div>
+    <div class="obj_icons"> <a href="/wiki/{{title}}"><span  style="display:inline-block;" class="ui-icon ui-icon-pencil"></span></a> <span style="display:inline-block;" class="ui-icon ui-icon-close lo_close"></span> </div>
   </div>
   <div class="objective_desc">
-    {{{{{{render}}}}}}
+    {{{render}}}
   </div>
 </div>
+</script>
+
+<script id="initial-concept-map" type="text/x-concept-map">
+PLACEHOLDER_FOR_CONCEPT_MAP
 </script>
 
 <div class="concept_wrapper">
