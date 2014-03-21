@@ -54,6 +54,9 @@ class ConceptXBlock(XBlock):
         cm = self.concept_map
         if not cm:
             cm = '{"required":[], "taught":[], "exercised":[]}'
+        server = self.server
+        if not server:
+            server = ""
         frag = Fragment(html.replace("PLACEHOLDER_FOR_CONCEPT_MAP",cm).replace("SERVER", self.server))
         frag.add_css_url("https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/smoothness/jquery-ui.css")
         frag.add_css(self.resource_string("static/css/concept.css"))
