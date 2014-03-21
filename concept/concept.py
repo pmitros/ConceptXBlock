@@ -70,7 +70,7 @@ class ConceptXBlock(XBlock):
         return frag
 
     def studio_view(self, context=None):
-        return ""
+        return Fragment("<div></div>")
 
     # TO-DO: change this to create the scenarios you'd like to see in the
     # workbench while developing your XBlock.
