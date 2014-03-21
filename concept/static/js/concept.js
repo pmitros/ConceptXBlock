@@ -27,20 +27,22 @@ function create_item(slug, full)
     var html = template({title:slug, render:full});
     var domitem = $(html);
     update_item(domitem, slug, full);
-    
-    domitem.draggable({
-	appendTo: "body",
-	helper: function(event) {return create_item(slug, full);},
-	connectToSortable: ".obj_drop",
-	drop : function(event, ui) { console.log(ui.helper); console.log(ui.draggable); }
-    });
-    
+        
     return domitem;
 }
 
 function add_search_item(slug, full)
 {
-    $(".search_results").append(create_item(slug, full));
+    item = create_item(slug, full)
+    item.draggable({
+//	appendTo: "body",
+	helper: function(event) {return create_item(slug, full);},
+	connectToSortable: ".obj_drop",
+//	drop : function(event, ui) { console.log(ui.helper); console.log(ui.draggable); }
+    });
+
+    $(".search_results").append(item);
+    //item.draggable("option", "helper", function(event) {return create_item(slug, full);});
 }
 
 function dump_state()
@@ -70,7 +72,7 @@ function refresh_search(search_string)
 	    var slug = data[i];
 	    url = xblock_runtime.handlerUrl(xblock_element, 'relay_handler')
 	    $.post(url, JSON.stringify({'suffix':'get_concept/'+slug}), function(render) {
-		add_search_item(slug, render.article);
+		add_search_item(render.slug, render.article);
 	    })
 	}
     })

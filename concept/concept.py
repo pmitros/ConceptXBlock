@@ -18,12 +18,14 @@ class ConceptXBlock(XBlock):
 
     server = String(
            scope = Scope.settings, 
-           help = "Concept map server URL"
+           help = "Concept map server URL",
+           default = "http://pmitros.edx.org:7000/"
         )
 
     concept_map = String(
         scope  = Scope.user_state_summary, # User scope: Global. Block scope: Usage
-        help = "Concept map"
+        help = "Concept map",
+        default = '{"required":[], "exercised":[], "taught":[]}'
         )
 
     @XBlock.json_handler
@@ -35,6 +37,7 @@ class ConceptXBlock(XBlock):
     def relay_handler(self, request, suffix):
         url = self.server+request['suffix']
         r = requests.get(url, params=request) 
+        print url, r.text[:80]
         return json.loads(r.text)
 
     def resource_string(self, path):
@@ -74,7 +77,7 @@ class ConceptXBlock(XBlock):
         return [
             ("ConceptXBlock",
              """<vertical_demo>
-                  <Concept server="http://pmitros.edx.org:8000/"> </Concept>
+                  <Concept server="http://pmitros.edx.org:7000/"> </Concept>
                 </vertical_demo>
              """),
         ]
