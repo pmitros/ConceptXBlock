@@ -70,7 +70,10 @@ class ConceptXBlock(XBlock):
         return frag
 
     def studio_view(self, context=None):
-        return Fragment(self.resource_string("static/html/studio_hack.html"))
+        frag = Fragment(self.resource_string("static/html/studio_hack.html"))
+        frag.add_javascript(pkg_resources.resource_string(__name__, "static/js/oa_server.js"))
+        frag.add_javascript(pkg_resources.resource_string(__name__, "static/js/oa_edit.js"))
+        return frag
 
     # TO-DO: change this to create the scenarios you'd like to see in the
     # workbench while developing your XBlock.
