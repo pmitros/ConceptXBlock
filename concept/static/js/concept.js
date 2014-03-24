@@ -70,7 +70,7 @@ function refresh_search(search_string)
     url = xblock_runtime.handlerUrl(xblock_element, 'relay_handler')
     $.post(url, JSON.stringify({'suffix':'get_concept_list','q':search_string}), function(data) {
 	$(".search_results").text("");
-	for (var i = 0; i<data.length; i++) {
+	for (var i = 0; i<Math.min(data.length, 15); i++) {
 	    var slug = data[i];
 	    url = xblock_runtime.handlerUrl(xblock_element, 'relay_handler')
 	    $.post(url, JSON.stringify({'suffix':'get_concept/'+slug}), function(render) {
