@@ -1,5 +1,5 @@
 var lo_source   = $("#lo-template").html();
-var template = Handlebars.compile(lo_source);
+var lo_template = Handlebars.compile(lo_source);
 
 var xblock_runtime = null;
 var xblock_element = null;
@@ -24,7 +24,7 @@ function update_item(item, slug, full)
 
 function create_item(slug, full)
 {
-    var html = template({title:slug, render:full});
+    var html = lo_template({title:slug, render:full});
     var domitem = $(html);
     update_item(domitem, slug, full);
         
@@ -117,7 +117,7 @@ function init() {
 }
 
 $(function() {
-    //var html = template({title:"Hello", render:"Hello world example"});
+    //var html = lo_template({title:"Hello", render:"Hello world example"});
     //$("#foo").html(html);
 //    init();
 });
