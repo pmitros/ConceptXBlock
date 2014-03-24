@@ -1,9 +1,11 @@
-AudioXBlock
+ConceptXBlock
 ===========
 
-This is a simple XBlock which will play audio files as an HTML5 audio
-element. If unavailable, it will fall back to an embed element.
+This is a simple XBlock which will allows one to tag problems with
+concepts. To be useful, it requires a concept server. There is one in
+the matching concept-tag-server repo.
 
 Usage: 
 
-    <audio src="http://server.tld/static/song.mp3" />
+       <Concept server="http://www.sample-concept-demo-server.org:7000/">
+
