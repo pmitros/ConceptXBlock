@@ -1,5 +1,5 @@
-var lo_source   = $("#lo-template").html();
-var lo_template = Handlebars.compile(lo_source);
+var lo_source   = null;
+var lo_template = null;
 
 var xblock_runtime = null;
 var xblock_element = null;
@@ -8,6 +8,8 @@ function ConceptXBlock(runtime, element)
 {
     xblock_runtime = runtime;
     xblock_element = element;
+    lo_source   = $("#lo-template").html();
+    lo_template = Handlebars.compile(lo_source);
     init();
 }
 
