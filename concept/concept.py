@@ -37,7 +37,6 @@ class ConceptXBlock(XBlock):
     def relay_handler(self, request, suffix):
         url = self.server+request['suffix']
         r = requests.get(url, params=request) 
-        print url, r.text[:80]
         return json.loads(r.text)
 
     def resource_string(self, path):
