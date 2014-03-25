@@ -53,10 +53,17 @@ class ConceptXBlock(XBlock):
         cm = self.concept_map
         if not cm:
             cm = '{"required":[], "taught":[], "exercised":[]}'
+
+        # These three lines are not strictly required, but they do
+        # make the code more robust if, for whatever reason, the
+        # storage ends up with nothing for the server. The client
+        # still doesn't work without a valid server, but we don't get
+        # an exception, so we're more likely to be able to get far
+        # enough to fix it.
         server = self.server
-        if not server:
+        if not server: 
             server = ""
-        frag = Fragment(html.replace("PLACEHOLDER_FOR_CONCEPT_MAP",cm).replace("SERVER", self.server))
+        frag = Fragment(html.replace("PLACEHOLDER_FOR_CONCEPT_MAP",cm).replace("SERVER", server))
         frag.add_css_url("https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/smoothness/jquery-ui.css")
         frag.add_css(self.resource_string("static/css/concept.css"))
 
