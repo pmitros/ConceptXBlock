@@ -40,6 +40,7 @@ The system has a few serious issues:
    limitation. 
 5. Lack of configurability. It works on my taxonomy
    (taught/exercised/required), and not yours.
+6. Horrific styling. In desperate need of a cleanup. 
 
 It does have a few nice properties: 
 
@@ -47,3 +48,5 @@ It does have a few nice properties:
    edX-as-a-product.
 2. Natural path (via concept wiki) to coming up with a concept
    taxonomy. Next steps will be to split and join objectives.
+3. Natural extension to other wise of tagging objectives (e.g. Bloom's
+   taxonomy, etc.)
