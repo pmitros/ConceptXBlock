@@ -2,7 +2,6 @@
 can integrate with the LMS more easily than with Studio, so it's in
 many ways an easier environment where to do this."""
 
-from __future__ import absolute_import
 
 import json
 
