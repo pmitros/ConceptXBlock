@@ -2,13 +2,15 @@
 can integrate with the LMS more easily than with Studio, so it's in
 many ways an easier environment where to do this."""
 
+
+import json
+
 import pkg_resources
-
-import json, requests
-
 from xblock.core import XBlock
-from xblock.fields import Scope, Integer, String
+from xblock.fields import Integer, Scope, String
 from xblock.fragment import Fragment
+
+import requests
 
 
 class ConceptXBlock(XBlock):
